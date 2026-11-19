@@ -205,5 +205,6 @@ $('finImg').src = IMG; $('modalImg').src = IMG;
 try { const g = localStorage.getItem('pesebre-nombre'); if (g) $('nombre').value = g; } catch(e) {}
 $('nombre').addEventListener('change', () => { try { localStorage.setItem('pesebre-nombre', $('nombre').value); } catch(e) {} });
 </script>
+<script src="musica.js" data-tema="silencio" defer></script>
 </body>
 </html>
