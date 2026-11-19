@@ -56,3 +56,12 @@ main{position:relative;z-index:1;padding-top:44px}
 @media (prefers-reduced-motion:reduce){
   body::after,.luces{animation:none}
 }
+
+/* Celular: en los juegos, deslizar hacia abajo no recarga la página */
+html:has(#lienzo), body:has(#lienzo){overscroll-behavior:contain}
+/* Celulares de poca altura: los juegos caben sin scroll */
+@media (max-height:720px){
+  main{padding-top:38px}
+  body:has(#lienzo) .sub{display:none}
+  body:has(.cruceta) #lienzo{max-width:min(100%,calc(100dvh - 300px))}
+}
