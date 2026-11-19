@@ -24,7 +24,7 @@ body::before{
 }
 /* Nieve: tres capas con distinto tamaño y velocidad */
 body::after{
-  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  content:"";position:fixed;left:0;right:0;top:-200px;bottom:0;will-change:transform;z-index:-1;pointer-events:none;
   background-image:
     radial-gradient(3px 3px at 20px 30px,#fff 60%,transparent 62%),
     radial-gradient(2px 2px at 90px 80px,#fffd 60%,transparent 62%),
@@ -36,7 +36,7 @@ body::after{
   animation:nieve 14s linear infinite;
   opacity:.8;
 }
-@keyframes nieve{to{background-position:-40px 200px}}
+@keyframes nieve{to{transform:translate3d(-40px,200px,0)}}
 /* Luces navideñas arriba (decorativas, no tapan el contenido) */
 .luces{
   position:absolute;top:0;left:0;right:0;height:34px;z-index:0;pointer-events:none;overflow:hidden;
@@ -45,8 +45,6 @@ body::after{
     radial-gradient(circle at 50% 70%,#ffd86b 0 6px,transparent 7px) 24px 0/96px 34px repeat-x,
     radial-gradient(circle at 50% 70%,#4ddc8a 0 6px,transparent 7px) 48px 0/96px 34px repeat-x,
     radial-gradient(circle at 50% 70%,#5cb8ff 0 6px,transparent 7px) 72px 0/96px 34px repeat-x;
-  filter:drop-shadow(0 0 6px #ffd86bb0);
-  animation:titilar 2.4s ease-in-out infinite alternate;
 }
 .luces::before{ /* cable */
   content:"";position:absolute;left:0;right:0;top:0;height:14px;
