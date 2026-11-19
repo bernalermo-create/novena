@@ -1,0 +1,60 @@
+/* Fondo navideño: cielo de noche, nieve cayendo, estrellas y luces. Solo CSS. */
+:root:root:root{
+  --fondo:#0b2f42; --texto:#fdf6e3; --suave:#b9d6de; --panel:#134a63; --linea:#2a6a85; --oro:#f2c14e;
+  color-scheme:dark;
+}
+html{background:#08202f}
+html body{
+  background:transparent !important;
+  position:relative;
+}
+/* Cielo: degradado de noche, brillo cálido abajo y estrellas */
+body::before{
+  content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background:
+    radial-gradient(1.5px 1.5px at 12% 18%,#fff8 50%,transparent 51%),
+    radial-gradient(1.5px 1.5px at 78% 12%,#fff9 50%,transparent 51%),
+    radial-gradient(1px 1px at 45% 30%,#fff7 50%,transparent 51%),
+    radial-gradient(1.5px 1.5px at 88% 42%,#fff8 50%,transparent 51%),
+    radial-gradient(1px 1px at 25% 55%,#fff6 50%,transparent 51%),
+    radial-gradient(1.5px 1.5px at 62% 68%,#fff7 50%,transparent 51%),
+    radial-gradient(ellipse 90% 40% at 50% 108%,#b8372f55,transparent 70%),
+    radial-gradient(ellipse 70% 35% at 10% 100%,#1f7a4d55,transparent 70%),
+    linear-gradient(180deg,#06182a 0%,#0b2f42 55%,#12404a 100%);
+}
+/* Nieve: tres capas con distinto tamaño y velocidad */
+body::after{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background-image:
+    radial-gradient(3px 3px at 20px 30px,#fff 60%,transparent 62%),
+    radial-gradient(2px 2px at 90px 80px,#fffd 60%,transparent 62%),
+    radial-gradient(3px 3px at 160px 20px,#fff 60%,transparent 62%),
+    radial-gradient(2px 2px at 60px 140px,#fffc 60%,transparent 62%),
+    radial-gradient(3px 3px at 130px 120px,#fff 60%,transparent 62%),
+    radial-gradient(2px 2px at 190px 170px,#fffd 60%,transparent 62%);
+  background-size:220px 200px;
+  animation:nieve 14s linear infinite;
+  opacity:.8;
+}
+@keyframes nieve{to{background-position:-40px 200px}}
+/* Luces navideñas arriba (decorativas, no tapan el contenido) */
+.luces{
+  position:absolute;top:0;left:0;right:0;height:34px;z-index:0;pointer-events:none;overflow:hidden;
+  background:
+    radial-gradient(circle at 50% 70%,#ff4d4d 0 6px,transparent 7px) 0 0/96px 34px repeat-x,
+    radial-gradient(circle at 50% 70%,#ffd86b 0 6px,transparent 7px) 24px 0/96px 34px repeat-x,
+    radial-gradient(circle at 50% 70%,#4ddc8a 0 6px,transparent 7px) 48px 0/96px 34px repeat-x,
+    radial-gradient(circle at 50% 70%,#5cb8ff 0 6px,transparent 7px) 72px 0/96px 34px repeat-x;
+  filter:drop-shadow(0 0 6px #ffd86bb0);
+  animation:titilar 2.4s ease-in-out infinite alternate;
+}
+.luces::before{ /* cable */
+  content:"";position:absolute;left:0;right:0;top:0;height:14px;
+  border-bottom:2px solid #2d5a49;border-radius:0 0 50% 50% / 0 0 100% 100%;
+  opacity:.8;
+}
+@keyframes titilar{from{opacity:.6}to{opacity:1}}
+main{position:relative;z-index:1;padding-top:44px}
+@media (prefers-reduced-motion:reduce){
+  body::after,.luces{animation:none}
+}

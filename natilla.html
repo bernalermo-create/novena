@@ -60,8 +60,10 @@ input[type=text]:focus-visible,.btn:focus-visible{outline:3px solid var(--vela);
 .enlaces{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
 .enlaces a{color:inherit;font-weight:700;text-decoration:underline;text-underline-offset:3px}
 </style>
+<link rel="stylesheet" href="fondo.css">
 </head>
 <body>
+<div class="luces" aria-hidden="true"></div>
 <main>
   <h1>Atrapa la natilla</h1>
   <p class="sub">Mueve la canasta y atrapa todo lo bueno de la novena. Tienes 60 segundos.</p>
@@ -94,7 +96,6 @@ input[type=text]:focus-visible,.btn:focus-visible{outline:3px solid var(--vela);
     <p class="fin-puntos" id="finPuntos">0</p>
     <p class="fin-label">puntos</p>
     <div class="resumen" id="resumen"></div>
-    <div class="sello">Toma captura de esta pantalla y envíala al grupo</div>
     <p class="nota" id="finHora" style="margin:0 0 6px"></p>
     <p class="nota" style="margin:0 0 16px">¡Feliz Navidad! Que no falten los buñuelos en tu casa.</p>
     <p class="envio" id="envio" aria-live="polite"></p>

@@ -79,8 +79,10 @@ input[type=text]:focus-visible{outline:3px solid var(--vela);outline-offset:2px}
 .enlaces{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
 .enlaces a{color:inherit;font-weight:700;text-decoration:underline;text-underline-offset:3px}
 </style>
+<link rel="stylesheet" href="fondo.css">
 </head>
 <body>
+<div class="luces" aria-hidden="true"></div>
 <main>
   <h1>Armemos el pesebre</h1>
   <p class="sub">Rompecabezas de la novena. Gana quien lo arme primero.</p>
@@ -112,7 +114,6 @@ input[type=text]:focus-visible{outline:3px solid var(--vela);outline-offset:2px}
     <p class="fin-nombre" id="finNombre"></p>
     <p class="fin-tiempo" id="finTiempo"></p>
     <p class="fin-extra" id="finExtra"></p>
-    <div class="sello">Toma captura de esta pantalla y envíala al grupo</div>
     <p class="nota" style="margin-bottom:16px">¡Feliz Navidad! Que la alegría del pesebre llegue a tu casa.</p>
     <p class="envio" id="envio" aria-live="polite"></p>
     <button id="otra" class="btn">Jugar otra vez</button>

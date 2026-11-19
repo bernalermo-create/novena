@@ -48,7 +48,7 @@
       el.dataset.estado = r.ok ? "ok" : "error";
       el.textContent = r.ok
         ? "✓ Tu resultado quedó en la tabla de clasificación"
-        : "No se pudo enviar el resultado. Envía tu captura al grupo.";
+        : "No se pudo enviar el resultado. Revisa tu conexión e inténtalo de nuevo.";
     });
   }
 
