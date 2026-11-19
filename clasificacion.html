@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Clasificación · Juegos de la Novena</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏆</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilo.css">
+<style>
+.pestanas{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:14px}
+.pestana{font:inherit;font-weight:800;font-size:.92rem;line-height:1.2;padding:12px 6px;border-radius:12px;border:2px solid var(--linea);background:transparent;color:var(--texto);cursor:pointer}
+.pestana[aria-selected="true"]{background:var(--c);border-color:var(--c);color:#fff}
+.criterio{text-align:center;color:var(--suave);font-size:.92rem;margin:0 0 12px}
+.podio{display:grid;grid-template-columns:1fr 1.15fr 1fr;gap:8px;align-items:end;margin-bottom:14px}
+.puesto{text-align:center;background:var(--panel);border:1px solid var(--linea);border-radius:14px;padding:12px 6px;border-top:6px solid var(--m)}
+.puesto.p1{padding-top:18px}
+.medalla{width:40px;height:40px;border-radius:50%;background:var(--m);display:grid;place-items:center;margin:0 auto 6px;font-family:"Bree Serif",Georgia,serif;font-size:1.3rem;color:#2b1a02}
+.puesto .nom{font-weight:800;line-height:1.2;word-break:break-word}
+.puesto .val{font-family:"Bree Serif",Georgia,serif;font-size:1.35rem;color:var(--oro);font-variant-numeric:tabular-nums}
+.puesto.vacio{opacity:.45}
+.lista{list-style:none;margin:0;padding:0;background:var(--panel);border:1px solid var(--linea);border-radius:14px;overflow:hidden}
+.lista li{display:grid;grid-template-columns:36px 1fr auto;gap:10px;align-items:center;padding:10px 14px;border-top:1px solid var(--linea)}
+.lista li:first-child{border-top:none}
+.lista .pos{font-weight:800;color:var(--suave);text-align:center}
+.lista .nom{font-weight:700;word-break:break-word}
+.lista .det{display:block;font-size:.8rem;color:var(--suave);font-weight:400}
+.lista .val{font-family:"Bree Serif",Georgia,serif;font-size:1.15rem;font-variant-numeric:tabular-nums}
+.aviso{text-align:center;padding:28px 16px;background:var(--panel);border:1px solid var(--linea);border-radius:14px;color:var(--suave)}
+.estado{text-align:center;color:var(--suave);font-size:.85rem;margin:14px 0 0}
+.volver{display:block;text-align:center;margin-top:20px;font-weight:700}
+</style>
+</head>
+<body>
+<main>
+  <h1>Tabla de clasificación</h1>
+  <p class="sub">Se muestra el mejor resultado de cada participante.</p>
+
+  <div class="pestanas" role="tablist" aria-label="Juegos">
+    <button class="pestana" role="tab" data-j="rompecabezas" style="--c:var(--c-rompe)">Rompecabezas</button>
+    <button class="pestana" role="tab" data-j="natilla" style="--c:var(--c-natilla)">Natilla</button>
+    <button class="pestana" role="tab" data-j="culebrita" style="--c:var(--c-culebra)">Culebrita</button>
+  </div>
+  <p class="criterio" id="criterio"></p>
+  <div id="contenido" aria-live="polite"></div>
+  <p class="estado" id="estado"></p>
+  <a class="volver" href="index.html">Volver a los juegos</a>
+</main>
+
+<script src="config.js"></script>
+<script src="marcador.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+const INFO={
+  rompecabezas:{criterio:'Gana el menor tiempo',fmt:v=>NovenaMarcador.formatoTiempo(v)},
+  natilla:{criterio:'Gana el mayor puntaje',fmt:v=>v+' pts'},
+  culebrita:{criterio:'Gana el mayor puntaje',fmt:v=>v+' pts'}
+};
+const MEDALLAS=['#f2c14e','#c9d3da','#d38b4f'];
+let actual=(location.hash||'').slice(1); if(!INFO[actual])actual='rompecabezas';
+let datos=null, ultima=null;
+
+function el(tag,cls,txt){const e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e;}
+
+function pintar(){
+  document.querySelectorAll('.pestana').forEach(b=>b.setAttribute('aria-selected',b.dataset.j===actual?'true':'false'));
+  $('criterio').textContent=INFO[actual].criterio;
+  const c=$('contenido');c.replaceChildren();
+  if(!NovenaMarcador.listo()){c.append(el('div','aviso','La tabla todavía no está conectada. Pega la dirección del script de Google en el archivo config.js.'));return;}
+  if(!datos){c.append(el('div','aviso','Cargando resultados…'));return;}
+  const lista=datos.juegos[actual]||[];
+  if(!lista.length){c.append(el('div','aviso','Aún no hay resultados en este juego. ¡Juega y sé el primero!'));return;}
+  const podio=el('div','podio');
+  [1,0,2].forEach(i=>{
+    const r=lista[i],p=el('div','puesto p'+(i+1)+(r?'':' vacio'));p.style.setProperty('--m',MEDALLAS[i]);
+    p.append(el('div','medalla',String(i+1)),el('div','nom',r?r.nombre:'—'),el('div','val',r?INFO[actual].fmt(r.valor):''));
+    podio.append(p);
+  });
+  c.append(podio);
+  if(lista.length>3){
+    const ul=el('ol','lista');
+    lista.slice(3).forEach((r,i)=>{
+      const li=el('li');const n=el('span','nom',r.nombre);if(r.detalle)n.append(el('span','det',r.detalle));
+      li.append(el('span','pos',String(i+4)),n,el('span','val',INFO[actual].fmt(r.valor)));ul.append(li);
+    });
+    c.append(ul);
+  }
+}
+
+async function cargar(){
+  if(!NovenaMarcador.listo()){pintar();return;}
+  try{datos=await NovenaMarcador.leer();ultima=new Date();$('estado').textContent='Actualizado a las '+ultima.toLocaleTimeString('es-CO',{hour:'2-digit',minute:'2-digit',second:'2-digit'})+'. Se actualiza solo cada 20 segundos.';}
+  catch(e){$('estado').textContent='No se pudieron cargar los resultados. Se intentará de nuevo en unos segundos.';}
+  pintar();
+}
+document.querySelectorAll('.pestana').forEach(b=>b.addEventListener('click',()=>{actual=b.dataset.j;history.replaceState(null,'','#'+actual);pintar();}));
+addEventListener('hashchange',()=>{const h=location.hash.slice(1);if(INFO[h]){actual=h;pintar();}});
+pintar();cargar();setInterval(cargar,20000);
+</script>
+</body>
+</html>

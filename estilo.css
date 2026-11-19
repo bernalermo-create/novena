@@ -1,0 +1,20 @@
+:root{
+  --oro:#f2c14e; --vela:#ffd86b;
+  --fondo:#0b2f42; --texto:#fdf6e3; --suave:#b9d6de; --panel:#134a63; --linea:#2a6a85;
+  --c-rompe:#3a9fc0; --c-natilla:#c9822e; --c-culebra:#d9483b;
+  color-scheme:dark;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){ --fondo:#eef3f4; --texto:#143246; --suave:#46677a; --panel:#ffffff; --linea:#c6d7de; --oro:#b77a12; color-scheme:light; }
+}
+:root[data-theme="light"]{ --fondo:#eef3f4; --texto:#143246; --suave:#46677a; --panel:#ffffff; --linea:#c6d7de; --oro:#b77a12; color-scheme:light; }
+:root[data-theme="dark"]{ --fondo:#0b2f42; --texto:#fdf6e3; --suave:#b9d6de; --panel:#134a63; --linea:#2a6a85; --oro:#f2c14e; color-scheme:dark; }
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--fondo);color:var(--texto);font-family:"Nunito",system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh;line-height:1.5}
+main{max-width:560px;margin:0 auto;padding:24px 16px 48px}
+h1{font-family:"Bree Serif",Georgia,serif;font-weight:400;font-size:clamp(2rem,8vw,2.8rem);line-height:1.1;margin:8px 0 8px;color:var(--oro);text-align:center}
+.sub{text-align:center;color:var(--suave);margin:0 0 24px}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:3px solid var(--vela);outline-offset:2px}

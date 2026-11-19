@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Juegos de la Novena</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⭐</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilo.css">
+<style>
+.estrella{display:block;margin:0 auto;width:64px;height:64px}
+.juegos{display:grid;gap:14px}
+.juego{display:grid;grid-template-columns:64px 1fr;gap:14px;align-items:center;text-decoration:none;background:var(--panel);border:1px solid var(--linea);border-left:8px solid var(--c);border-radius:16px;padding:14px 16px}
+.juego:active{transform:translateY(1px)}
+.icono{width:64px;height:64px;border-radius:50%;background:var(--c);display:grid;place-items:center}
+.icono svg{width:38px;height:38px}
+.juego h2{font-family:"Bree Serif",Georgia,serif;font-weight:400;font-size:1.35rem;margin:0;line-height:1.2}
+.juego p{margin:2px 0 0;color:var(--suave);font-size:.95rem}
+.gana{display:inline-block;margin-top:6px;font-size:.85rem;font-weight:700;color:var(--texto)}
+.tabla{display:block;text-align:center;margin:22px 0 0;padding:16px;border-radius:16px;border:2px dashed var(--oro);text-decoration:none;font-weight:800;font-size:1.1rem;color:var(--oro)}
+.pie{text-align:center;color:var(--suave);font-size:.9rem;margin-top:24px}
+</style>
+</head>
+<body>
+<main>
+  <svg class="estrella" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 6l12 30 32 2-25 20 8 32-27-18-27 18 8-32L6 38l32-2z" fill="#ffd23f"/></svg>
+  <h1>Juegos de la Novena</h1>
+  <p class="sub">Escoge un juego, escribe tu nombre y compite. Los mejores de cada juego aparecen en la clasificación.</p>
+
+  <div class="juegos">
+    <a class="juego" href="rompecabezas.html" style="--c:var(--c-rompe)">
+      <span class="icono"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M6 6h12v4a3 3 0 1 0 6 0V6h10v12h-4a3 3 0 1 0 0 6h4v10H6z" fill="#fff"/></svg></span>
+      <span><h2>Armemos el pesebre</h2><p>Rompecabezas de 25 piezas.</p><span class="gana">Gana el menor tiempo</span></span>
+    </a>
+    <a class="juego" href="natilla.html" style="--c:var(--c-natilla)">
+      <span class="icono"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M5 18h30l-4 14H9z" fill="#fff"/><circle cx="14" cy="12" r="5" fill="#ffe3a3"/><rect x="21" y="7" width="10" height="10" rx="2" fill="#5c2c10"/></svg></span>
+      <span><h2>Atrapa la natilla</h2><p>Atrapa buñuelos, natilla y estrellas durante 60 segundos.</p><span class="gana">Gana el mayor puntaje</span></span>
+    </a>
+    <a class="juego" href="culebrita.html" style="--c:var(--c-culebra)">
+      <span class="icono"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M8 30c0-6 6-6 12-6s10-2 10-8" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/><circle cx="30" cy="12" r="6" fill="#3fae5c"/><circle cx="9" cy="30" r="3" fill="#f2c14e"/></svg></span>
+      <span><h2>La culebrita buñuelera</h2><p>Come buñuelos sin chocarte.</p><span class="gana">Gana el mayor puntaje</span></span>
+    </a>
+  </div>
+
+  <a class="tabla" href="clasificacion.html">Ver la tabla de clasificación</a>
+  <p class="pie">¡Feliz Navidad!</p>
+</main>
+</body>
+</html>
